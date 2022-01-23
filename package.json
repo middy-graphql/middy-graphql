@@ -1,6 +1,6 @@
 {
   "name": "middy-graphql",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "🛵 The simple Graphql framework for Node.js inspired by middyjs",
   "main": "index.js",
   "author": {

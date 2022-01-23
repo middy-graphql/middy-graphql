@@ -1,6 +1,8 @@
 reports
 junit.xml
 dist
+.DS_Store
+.npmignore
 build
 .swc
 .build-cache
