@@ -3,14 +3,17 @@
   "version": "0.0.0",
   "description": "🛵 The simple Graphql framework for Node.js inspired by middyjs (error package)",
   "type": "commonjs",
-  "main": "dist/error/index.js",
-  "types": "dist/error/index.d.ts",
+  "main": "index.js",
+  "types": "index.d.ts",
   "public": "true",
   "engines": {
     "node": ">=12"
   },
   "engineStrict": true,
   "license": "MIT",
+  "scripts": {
+    "test": "ava"
+  },
   "devDependencies": {
     "@types/graphql": "^14.5.0"
   },
