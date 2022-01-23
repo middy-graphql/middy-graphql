@@ -1,20 +1,21 @@
 {
   "name": "@middy-graphql/core",
   "version": "0.0.0",
-  "description": "🛵 The simple Graphql framework for Node.js inspired by middyjs (core package)",
+  "description": "🛵 The simple Graphql framework for Node.js inspired by middyjs (error core)",
   "type": "commonjs",
-  "main": "dist/core/index.js",
-  "types": "dist/core/index.d.ts",
+  "main": "index.js",
+  "types": "index.d.ts",
   "public": "true",
   "engines": {
     "node": ">=12"
   },
+  "scripts": {
+    "test": "ava"
+  },
   "engineStrict": true,
   "license": "MIT",
-  "scripts": {
-    "build": "tsc",
-    "test": "jest",
-    "coverage": "jest --coverage"
+  "devDependencies": {
+    "@types/graphql": "^14.5.0"
   },
   "dependencies": {
     "graphql": "^16.2.0"

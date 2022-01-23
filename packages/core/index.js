@@ -1,11 +1,9 @@
-import { GraphQLError, GraphQLResolveInfo } from "graphql";
+function middy(baseResolver) {
+  const beforeMiddlewares = [];
+  const afterMiddlewares = [];
+  const onErrorMiddlewares = [];
 
-export default function middyfy(baseResolver: Resolver) {
-  const beforeMiddlewares: MiddlewareFn[] = [];
-  const afterMiddlewares: MiddlewareFn[] = [];
-  const onErrorMiddlewares: MiddlewareFn[] = [];
-
-  function resolver(root: any, args: any, context: any, info: GraphQLResolveInfo) {
+  function resolver(root, args, context, info) {
     return execute(
       { root, args, context, info },
       beforeMiddlewares,
@@ -15,7 +13,7 @@ export default function middyfy(baseResolver: Resolver) {
     );
   }
 
-  resolver.use = function (middlewares: MiddlewareObj | MiddlewareObj[]) {
+  resolver.use = function (middlewares) {
     if (Array.isArray(middlewares)) {
       for (const middleware of middlewares) {
         resolver.applyMiddleware(middleware);
@@ -27,7 +25,7 @@ export default function middyfy(baseResolver: Resolver) {
     return resolver.applyMiddleware(middlewares);
   };
 
-  resolver.applyMiddleware = function (middleware: MiddlewareObj = {}) {
+  resolver.applyMiddleware = function (middleware = {}) {
     const { before, after, onError } = middleware;
 
     if (!before && !after && !onError) {
@@ -44,15 +42,15 @@ export default function middyfy(baseResolver: Resolver) {
   };
 
   // Inline Middlewares
-  resolver.before = function (beforeMiddleware: MiddlewareFn) {
+  resolver.before = function (beforeMiddleware) {
     beforeMiddlewares.push(beforeMiddleware);
     return resolver;
   };
-  resolver.after = function (afterMiddleware: MiddlewareFn) {
+  resolver.after = function (afterMiddleware) {
     afterMiddlewares.unshift(afterMiddleware);
     return resolver;
   };
-  resolver.onError = function (onErrorMiddleware: MiddlewareFn) {
+  resolver.onError = function (onErrorMiddleware) {
     onErrorMiddlewares.push(onErrorMiddleware);
     return resolver;
   };
@@ -67,11 +65,11 @@ export default function middyfy(baseResolver: Resolver) {
 }
 
 async function execute(
-  request: Request,
-  beforeMiddlewares: MiddlewareFn[],
-  baseResolver: Resolver,
-  afterMiddlewares: MiddlewareFn[],
-  onErrorMiddlewares: MiddlewareFn[]
+  request,
+  beforeMiddlewares,
+  baseResolver,
+  afterMiddlewares,
+  onErrorMiddlewares
 ) {
   try {
     await runMiddlewares(request, beforeMiddlewares);
@@ -85,7 +83,7 @@ async function execute(
   } catch (e) {
     // Reset response changes made by after stack before error thrown
     request.response = undefined;
-    request.error = e as GraphQLError;
+    request.error = e;
 
     if (onErrorMiddlewares.length === 0) {
       throw e;
@@ -101,7 +99,7 @@ async function execute(
   return request.response;
 }
 
-async function runMiddlewares(request: Request, middlewares: MiddlewareFn[]) {
+async function runMiddlewares(request, middlewares) {
   for (const middleware of middlewares) {
     const res = await middleware?.(request);
 
@@ -113,32 +111,4 @@ async function runMiddlewares(request: Request, middlewares: MiddlewareFn[]) {
   }
 }
 
-export type Request<TRoot = any, TArgs = any, ContextType = any, TResult = any> = ResolverData<
-  TRoot,
-  TArgs,
-  ContextType
-> & {
-  response?: TResult;
-  error?: GraphQLError;
-};
-
-export type MiddlewareFn<TRoot = any, TArgs = any, TContext = any, TResult = any> = (
-  data: Request<TRoot, TArgs, TContext, TResult>
-) => TResult;
-
-export interface MiddlewareObj<TRoot = any, TArgs = any, TContext = any, TResult = any> {
-  before?: MiddlewareFn<TRoot, TArgs, TContext, TResult>;
-  after?: MiddlewareFn<TRoot, TArgs, TContext, TResult>;
-  onError?: MiddlewareFn<TRoot, TArgs, TContext, TResult>;
-}
-
-export type Resolver<TRoot = any, TArgs = any, TContext = any, TResult = any> = (
-  data: ResolverData<TRoot, TArgs, TContext>
-) => TResult;
-
-export interface ResolverData<TRoot, TArgs, TContext> {
-  root: TRoot;
-  args: TArgs;
-  context: TContext;
-  info: GraphQLResolveInfo;
-}
+module.exports = middy;
