@@ -12,6 +12,11 @@
   "workspaces": [
     "packages/**"
   ],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
   "scripts": {
     "build:core": "yarn clean:build && tsc --project ./packages/core/tsconfig.json",
     "build:error": "yarn clean:build && tsc --project ./packages/error/tsconfig.json",
@@ -19,13 +24,19 @@
     "clean:build": "rimraf .build-cache && rimraf ./packages/**/dist",
     "release:version": "lerna version --no-changelog --no-push --no-git-tag-version",
     "release:build": "lerna run --parallel build",
-    "release:publish": "lerna publish from-package --dist-tag latest --contents build"
+    "release:publish": "lerna publish from-package --dist-tag latest --contents build",
+    "commit": "git cz",
+    "prepare": "husky install"
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.1.0",
+    "@commitlint/config-conventional": "^16.0.0",
     "@swc/core": "^1.2.133",
     "@swc/jest": "^0.2.17",
     "@types/jest": "^27.4.0",
     "@types/node": "^17.0.10",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
     "husky": "^7.0.4",
     "jest": "^27.4.7",
     "jest-junit": "^13.0.0",
