@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "tsBuildInfoFile": "../../.build-cache/validator.tsbuildinfo"
+  },
+  "include": ["../error", "../core", "./index.ts"],
+  "exclude": ["./dist", "./node_modules"]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "@middy-graphql/validator",
+  "version": "0.0.0",
+  "description": "🛵 The simple Graphql framework for Node.js inspired by middyjs (validator package)",
+  "type": "commonjs",
+  "public": "true",
+  "engines": {
+    "node": ">=12"
+  },
+  "main": "dist/validator/index.js",
+  "types": "dist/validator/index.d.ts",
+  "engineStrict": true,
+  "license": "MIT",
+  "dependencies": {
+    "@middy-graphql/core": "^0.0.0",
+    "@middy-graphql/error": "^0.0.0",
+    "joi": "^17.5.0"
+  }
+}
