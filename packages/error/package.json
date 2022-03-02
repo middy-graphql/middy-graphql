@@ -2,6 +2,11 @@
   "name": "@middy-graphql/error",
   "version": "0.0.0",
   "description": "🛵 The simple Graphql framework for Node.js inspired by middyjs (error package)",
+  "author": {
+    "name": "kyuhak yuk",
+    "url": "https://github.com/kyuhakyuk"
+  },
+  "homepage": "https://github.com/kyuhakyuk/middy-graphql",
   "type": "commonjs",
   "main": "index.js",
   "types": "index.d.ts",
