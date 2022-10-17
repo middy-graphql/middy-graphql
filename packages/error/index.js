@@ -41,50 +41,49 @@ function toGraphQLError(error) {
 }
 
 class InternalError extends GraphqlError {
-  constructor(message, extensions) {
+  constructor(
+    message = 'Oops, something went wrong! Our engineers have been alerted and will fix this asap.',
+    extensions
+  ) {
     super(message, 'INTERNAL_SERVER_ERROR', extensions)
 
-    Object.defineProperty(this, 'name', { value: 'InternalError' })
-  }
-}
-
-class InputError extends GraphqlError {
-  constructor(message, extensions) {
-    super(message, 'BAD_REQUEST', extensions)
-
-    Object.defineProperty(this, 'name', { value: 'InputError' })
+    Object.defineProperty(this, 'INTERNAL_SERVER_ERROR', {
+      value: 'InternalError',
+    })
   }
 }
 
 class ValidationError extends GraphqlError {
-  constructor(message, extensions) {
-    super(message, 'GRAPHQL_VALIDATION_FAILED', extensions)
+  constructor(
+    message = 'Validation error(s) present. See extensions for more details.',
+    extensions
+  ) {
+    super(message, 'VALIDATION_ERROR', extensions)
 
-    Object.defineProperty(this, 'name', { value: 'ValidationError' })
+    Object.defineProperty(this, 'VALIDATION_ERROR')
   }
 }
 
-class AuthenticationError extends GraphqlError {
-  constructor(message, extensions) {
-    super(message, 'UNAUTHENTICATED', extensions)
+class ForbiddenError extends GraphqlError {
+  constructor(message = 'Forbidden', extensions) {
+    super(message, 'FORBIDDEN_ERROR', extensions)
 
-    Object.defineProperty(this, 'name', { value: 'AuthenticationError' })
+    Object.defineProperty(this, 'FORBIDDEN_ERROR')
   }
 }
 
-class AuthorizationError extends GraphqlError {
-  constructor(message, extensions) {
-    super(message, 'UNAUTHORIZED', extensions)
+class NotFoundError extends GraphqlError {
+  constructor(message = 'Not Found', extensions) {
+    super(message, 'NOT_FOUND', extensions)
 
-    Object.defineProperty(this, 'name', { value: 'AuthorizationError' })
+    Object.defineProperty(this, 'NOT_FOUND')
   }
 }
 
 module.exports = {
   GraphqlError,
-  AuthenticationError,
-  AuthorizationError,
-  InputError,
+  ForbiddenError,
   ValidationError,
   InternalError,
+  NotFoundError,
 }
