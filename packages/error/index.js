@@ -80,10 +80,19 @@ class NotFoundError extends GraphqlError {
   }
 }
 
+class BadRequestError extends GraphqlError {
+  constructor(message = 'Bad Request', extensions) {
+    super(message, 'BAD_REQUEST', extensions)
+
+    Object.defineProperty(this, 'BAD_REQUEST')
+  }
+}
+
 module.exports = {
   GraphqlError,
   ForbiddenError,
   ValidationError,
   InternalError,
   NotFoundError,
+  BadRequestError,
 }

@@ -30,3 +30,6 @@ export declare class ForbiddenError extends GraphqlError {
 export declare class NotFoundError extends GraphqlError {
   constructor(message: string, extensions?: Record<string, any>)
 }
+export declare class BadRequestError extends GraphqlError {
+  constructor(message: string, extensions?: Record<string, any>)
+}
