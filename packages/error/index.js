@@ -1,95 +1,43 @@
-const { GraphQLError: BaseGraphQLError, formatError } = require('graphql')
+const { ApolloError } = require('apollo-server-errors')
 
-class GraphqlError extends Error {
-  extensions
-  name
-  locations
-  path
-  source
-  positions
-  nodes
-  originalError
-
-  constructor(message, code, extensions) {
-    super(message)
-
-    this.extensions = {
-      code,
-      ...extensions,
-    }
-  }
-
-  toJSON() {
-    return formatError(toGraphQLError(this))
-  }
-
-  get [Symbol.toStringTag]() {
-    return this.name
-  }
-}
-
-function toGraphQLError(error) {
-  return new BaseGraphQLError(
-    error.message,
-    error.nodes,
-    error.source,
-    error.positions,
-    error.path,
-    error.originalError,
-    error.extensions
-  )
-}
-
-class InternalError extends GraphqlError {
+class InternalError extends ApolloError {
   constructor(
     message = 'Oops, something went wrong! Our engineers have been alerted and will fix this asap.',
     extensions
   ) {
     super(message, 'INTERNAL_SERVER_ERROR', extensions)
-
-    Object.defineProperty(this, 'INTERNAL_SERVER_ERROR', {
-      value: 'InternalError',
-    })
   }
 }
 
-class ValidationError extends GraphqlError {
+class ValidationError extends ApolloError {
   constructor(
     message = 'Validation error(s) present. See extensions for more details.',
     extensions
   ) {
     super(message, 'VALIDATION_ERROR', extensions)
-
-    Object.defineProperty(this, 'VALIDATION_ERROR')
   }
 }
 
-class ForbiddenError extends GraphqlError {
+class ForbiddenError extends ApolloError {
   constructor(message = 'Forbidden', extensions) {
     super(message, 'FORBIDDEN_ERROR', extensions)
-
-    Object.defineProperty(this, 'FORBIDDEN_ERROR')
   }
 }
 
-class NotFoundError extends GraphqlError {
+class NotFoundError extends ApolloError {
   constructor(message = 'Not Found', extensions) {
     super(message, 'NOT_FOUND', extensions)
-
-    Object.defineProperty(this, 'NOT_FOUND')
   }
 }
 
-class BadRequestError extends GraphqlError {
+class BadRequestError extends ApolloError {
   constructor(message = 'Bad Request', extensions) {
     super(message, 'BAD_REQUEST', extensions)
-
-    Object.defineProperty(this, 'BAD_REQUEST')
   }
 }
 
 module.exports = {
-  GraphqlError,
+  ApolloError,
   ForbiddenError,
   ValidationError,
   InternalError,
