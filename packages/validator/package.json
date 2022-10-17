@@ -1,6 +1,6 @@
 {
   "name": "@middy-graphql/validator",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "🛵 The simple Graphql framework for Node.js inspired by middyjs (validator package)",
   "author": {
     "name": "kyuhak yuk",
