@@ -21,8 +21,10 @@
   "license": "MIT",
   "dependencies": {
     "@middy-graphql/core": "^0.0.0",
-    "@middy-graphql/error": "^0.0.0",
-    "joi": "^17.5.0"
+    "@middy-graphql/error": "^0.0.1",
+    "joi": "^17.5.0",
+    "lodash.compact": "^3.0.1",
+    "lodash.flatten": "^4.4.0"
   },
   "devDependencies": {
     "@types/joi": "^17.2.3"

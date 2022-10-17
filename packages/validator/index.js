@@ -1,40 +1,37 @@
 const { ValidationError } = require('@middy-graphql/error')
+const flatten = require('lodash.flatten')
+const compact = require('lodash.compact')
 
-function validatorMiddleware(options = {}) {
-  const { inputSchema, outputSchema } = options
+function validator(schema) {
+  async function before(request) {
+    const requestData = {
+      args: request.args,
+    }
 
-  const validatorMiddlewareBefore = request => {
-    const { error } = inputSchema.validate(request.args)
+    const errors = Object.keys(schema).map(key => {
+      const validationResult = schema[key].validate(requestData[key], {
+        abortEarly: false,
+        convert: true,
+      })
 
-    if (error) {
-      const { message, path } = errorParser(error)
+      return validationResult.error?.details.map(detail => ({
+        message: detail.message,
+        label: detail.context.label,
+        key: detail.context.key,
+        value: detail.context.value,
+      }))
+    })
 
-      throw new ValidationError(message, { path })
+    const flattenedErrors = flatten(errors)
+
+    if (compact(flattenedErrors).length > 0) {
+      throw new ValidationError(undefined, flattenedErrors)
     }
   }
 
-  const validatorMiddlewareAfter = request => {
-    const { error } = outputSchema.validate(request.response)
-
-    if (error) {
-      const { message, path } = errorParser(error)
-
-      throw new ValidationError(message, { path })
-    }
-  }
   return {
-    before: inputSchema ? validatorMiddlewareBefore : undefined,
-    after: outputSchema ? validatorMiddlewareAfter : undefined,
+    before,
   }
 }
 
-function errorParser(error) {
-  const { message, path } = error.details[0]
-
-  return {
-    message,
-    path,
-  }
-}
-
-module.exports = validatorMiddleware
+module.exports = validator

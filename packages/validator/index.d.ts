@@ -1,12 +1,12 @@
-import joi from "joi";
-import { Request } from "@middy-graphql/core";
-declare type Options = {
-  inputSchema?: joi.ObjectSchema<any>;
-  outputSchema?: joi.ObjectSchema<any>;
-};
-declare function validatorMiddleware(options?: Options): {
-  before: ((request: Request) => void) | undefined;
-  after: ((request: Request) => void) | undefined;
-};
+import joi from 'joi'
+import { Request } from '@middy-graphql/core'
 
-export default validatorMiddleware;
+interface JoiValidatorSchema {
+  args?: joi.AnySchema<any>
+}
+
+declare function validator(schema: JoiValidatorSchema): {
+  before: ((request: Request) => void) | undefined
+}
+
+export default validator
