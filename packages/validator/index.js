@@ -25,7 +25,7 @@ function validator(schema) {
     const flattenedErrors = flatten(errors)
 
     if (compact(flattenedErrors).length > 0) {
-      throw new ValidationError(undefined, flattenedErrors)
+      throw new ValidationError(undefined, { details: flattenedErrors })
     }
   }
 
