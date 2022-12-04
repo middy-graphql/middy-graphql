@@ -15,3 +15,9 @@ export declare class NotFoundError extends ApolloError {
 export declare class BadRequestError extends ApolloError {
   constructor(message?: string, extensions?: Record<string, any>)
 }
+export declare class TooManyRequestsError extends ApolloError {
+  constructor(message?: string, extensions?: Record<string, any>)
+}
+export declare class ConflictError extends ApolloError {
+  constructor(message?: string, extensions?: Record<string, any>)
+}

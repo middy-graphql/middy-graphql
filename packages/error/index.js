@@ -36,9 +36,23 @@ class BadRequestError extends ApolloError {
   }
 }
 
+class TooManyRequestsError extends ApolloError {
+  constructor(message = 'Too Many Requests', extensions) {
+    super(message, 'TOO_MANY_REQUESTS', extensions)
+  }
+}
+
+class ConflictError extends ApolloError {
+  constructor(message = 'Conflict Request', extensions) {
+    super(message, 'CONFLICT', extensions)
+  }
+}
+
 module.exports = {
   ApolloError,
+  ConflictError,
   ForbiddenError,
+  TooManyRequestsError,
   ValidationError,
   InternalError,
   NotFoundError,
