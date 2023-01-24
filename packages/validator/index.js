@@ -2,7 +2,7 @@ const { ValidationError } = require('@middy-graphql/error')
 const flatten = require('lodash.flatten')
 const compact = require('lodash.compact')
 
-function validator(schema) {
+function validator(schema, cb) {
   async function before(request) {
     const requestData = {
       args: request.args,
@@ -25,6 +25,7 @@ function validator(schema) {
     const flattenedErrors = flatten(errors)
 
     if (compact(flattenedErrors).length > 0) {
+      cb?.(errors)
       throw new ValidationError(undefined, { details: flattenedErrors })
     }
   }
