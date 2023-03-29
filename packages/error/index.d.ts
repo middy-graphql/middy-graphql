@@ -1,23 +1,25 @@
-import { ApolloError } from 'apollo-server-errors'
+import { ApolloError as _ApolloError } from 'apollo-server-errors'
 
-export declare class InternalError extends ApolloError {
+export declare class ApolloError extends _ApolloError {} 
+
+export declare class InternalError extends _ApolloError {
   constructor(message?: string, extensions?: Record<string, any>)
 }
-export declare class ValidationError extends ApolloError {
+export declare class ValidationError extends _ApolloError {
   constructor(message?: string, extensions?: Record<string, any>)
 }
-export declare class ForbiddenError extends ApolloError {
+export declare class ForbiddenError extends _ApolloError {
   constructor(message?: string, extensions?: Record<string, any>)
 }
-export declare class NotFoundError extends ApolloError {
+export declare class NotFoundError extends _ApolloError {
   constructor(message?: string, extensions?: Record<string, any>)
 }
-export declare class BadRequestError extends ApolloError {
+export declare class BadRequestError extends _ApolloError {
   constructor(message?: string, extensions?: Record<string, any>)
 }
-export declare class TooManyRequestsError extends ApolloError {
+export declare class TooManyRequestsError extends _ApolloError {
   constructor(message?: string, extensions?: Record<string, any>)
 }
-export declare class ConflictError extends ApolloError {
+export declare class ConflictError extends _ApolloError {
   constructor(message?: string, extensions?: Record<string, any>)
 }
