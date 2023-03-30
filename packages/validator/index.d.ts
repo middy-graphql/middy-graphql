@@ -3,6 +3,9 @@ import { Request } from '@middy-graphql/core'
 
 interface JoiValidatorSchema {
   args?: joi.AnySchema<any>
+  context?: joi.AnySchema<any>
+  info?: joi.AnySchema<any>
+  root?: joi.AnySchema<any>
 }
 
 declare function validator(
