@@ -1,55 +1,73 @@
-const { ApolloError } = require('apollo-server-errors')
+const { GraphQLError } = require('graphql')
 
-class InternalError extends ApolloError {
-  constructor(
-    message = 'Oops, something went wrong! Our engineers have been alerted and will fix this asap.',
-    extensions
-  ) {
-    super(message, 'INTERNAL_SERVER_ERROR', extensions)
+class InternalError extends GraphQLError {
+  constructor(message = 'Internal server error.', extensions) {
+    super(message, {
+      code: 'INTERNAL_SERVER_ERROR',
+      ...extensions,
+    })
   }
 }
 
-class ValidationError extends ApolloError {
+class ValidationError extends GraphQLError {
   constructor(
     message = 'Validation error(s) present. See extensions for more details.',
     extensions
   ) {
-    super(message, 'VALIDATION_ERROR', extensions)
+    super(message, {
+      code: 'VALIDATION_ERROR',
+      ...extensions,
+    })
   }
 }
 
-class ForbiddenError extends ApolloError {
+class ForbiddenError extends GraphQLError {
   constructor(message = 'Forbidden', extensions) {
-    super(message, 'FORBIDDEN_ERROR', extensions)
+    super(message, {
+      code: 'FORBIDDEN',
+      ...extensions,
+    })
   }
 }
 
-class NotFoundError extends ApolloError {
+class NotFoundError extends GraphQLError {
   constructor(message = 'Not Found', extensions) {
-    super(message, 'NOT_FOUND', extensions)
+    super(message, {
+      code: 'NOT_FOUND',
+      ...extensions,
+    })
   }
 }
 
-class BadRequestError extends ApolloError {
+class BadRequestError extends GraphQLError {
   constructor(message = 'Bad Request', extensions) {
-    super(message, 'BAD_REQUEST', extensions)
+    super(message, {
+      code: 'BAD_REQUEST',
+      ...extensions,
+    })
   }
 }
 
-class TooManyRequestsError extends ApolloError {
+class TooManyRequestsError extends GraphQLError {
   constructor(message = 'Too Many Requests', extensions) {
-    super(message, 'TOO_MANY_REQUESTS', extensions)
+    super(message, {
+      code: 'TOO_MANY_REQUESTS',
+      ...extensions,
+    })
   }
 }
 
-class ConflictError extends ApolloError {
+class ConflictError extends GraphQLError {
   constructor(message = 'Conflict Request', extensions) {
-    super(message, 'CONFLICT', extensions)
+    super(message, {
+      code: 'CONFLICT',
+      ...extensions,
+    })
   }
 }
 
 module.exports = {
-  ApolloError,
+  GraphQLError,
   ConflictError,
   ForbiddenError,
   TooManyRequestsError,

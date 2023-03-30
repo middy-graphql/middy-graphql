@@ -1,25 +1,25 @@
-import { ApolloError as _ApolloError } from 'apollo-server-errors'
+import { GraphQLError as _GraphQLError } from 'graphql'
 
-export declare class ApolloError extends _ApolloError {} 
+export declare class GraphQLError extends _GraphQLError {}
 
-export declare class InternalError extends _ApolloError {
+export declare class InternalError extends _GraphQLError {
   constructor(message?: string, extensions?: Record<string, any>)
 }
-export declare class ValidationError extends _ApolloError {
+export declare class ValidationError extends _GraphQLError {
   constructor(message?: string, extensions?: Record<string, any>)
 }
-export declare class ForbiddenError extends _ApolloError {
+export declare class ForbiddenError extends _GraphQLError {
   constructor(message?: string, extensions?: Record<string, any>)
 }
-export declare class NotFoundError extends _ApolloError {
+export declare class NotFoundError extends _GraphQLError {
   constructor(message?: string, extensions?: Record<string, any>)
 }
-export declare class BadRequestError extends _ApolloError {
+export declare class BadRequestError extends _GraphQLError {
   constructor(message?: string, extensions?: Record<string, any>)
 }
-export declare class TooManyRequestsError extends _ApolloError {
+export declare class TooManyRequestsError extends _GraphQLError {
   constructor(message?: string, extensions?: Record<string, any>)
 }
-export declare class ConflictError extends _ApolloError {
+export declare class ConflictError extends _GraphQLError {
   constructor(message?: string, extensions?: Record<string, any>)
 }
