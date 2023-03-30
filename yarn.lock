@@ -1744,19 +1744,18 @@
     npmlog "^4.1.2"
     write-file-atomic "^3.0.3"
 
-"@middy-graphql/core@^0.0.0":
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/@middy-graphql/core/-/core-0.0.0.tgz#a1eda122ce6d91c8be7cfcee0c6640053b01250b"
-  integrity sha512-vN3yBv4a+ByZHytu1/kS40Jxi/vpepMXqHlrdrEMZM5p0KNa9hXknTDF8S4Ou1rYwqVCykWI203GScjypT4RnA==
+"@middy-graphql/core@latest":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@middy-graphql/core/-/core-0.0.2.tgz#9e6a71001ffa4b74a04bfacf52dba356ca021b57"
+  integrity sha512-PIUJ34iuz+l0B/DfthV3Ia/Cfs9zjHuBxyluofyRVZctftIANh8ytE7clJPvAtxfxbKdVX7mpxrBgQZFpgYIlQ==
   dependencies:
     graphql "^16.2.0"
 
-"@middy-graphql/error@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@middy-graphql/error/-/error-0.0.3.tgz#d5dd4c313bd3ce9e463f62e8b762f88971a6f8b2"
-  integrity sha512-NmLJL0D/jd7+odGRYfyHP+fTd3BO5uHCymI9MDcVVUfWiFIaCFTGpb+kvSiMVKrPXWUsKkkmHtFVrY51WXBVeQ==
+"@middy-graphql/error@latest":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@middy-graphql/error/-/error-0.0.8.tgz#87f1826aad66357b65104e435cb2e1c493cbfb88"
+  integrity sha512-eWGuU0nyyoq8JMeHY/zd/kKOyAN5RxPEY7/OCSTr/O2SGTBWiBMOAqdjm2fMc9W1X9rJ6goeiuQTF/MSENK4ew==
   dependencies:
-    apollo-server-errors "^3.3.1"
     graphql "^16.2.0"
 
 "@nodelib/fs.scandir@2.1.5":
@@ -2227,11 +2226,6 @@ anymatch@~3.1.2:
   dependencies:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
-
-apollo-server-errors@^3.3.1:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/apollo-server-errors/-/apollo-server-errors-3.3.1.tgz#ba5c00cdaa33d4cbd09779f8cb6f47475d1cd655"
-  integrity sha512-xnZJ5QWs6FixHICXHxUfm+ZWqqxrNuPlQ+kj5m6RtEgIpekOPssH/SD9gf2B4HuWV0QozorrygwZnux8POvyPA==
 
 aproba@^1.0.3:
   version "1.2.0"
