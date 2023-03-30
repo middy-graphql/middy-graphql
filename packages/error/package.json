@@ -1,6 +1,6 @@
 {
   "name": "@middy-graphql/error",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "🛵 The simple Graphql framework for Node.js inspired by middyjs (error package)",
   "author": {
     "name": "kyuhak yuk",
@@ -19,11 +19,7 @@
   "scripts": {
     "test": "ava"
   },
-  "devDependencies": {
-    "@types/graphql": "^14.5.0"
-  },
   "dependencies": {
-    "apollo-server-errors": "^3.3.1",
     "graphql": "^16.2.0"
   }
 }
