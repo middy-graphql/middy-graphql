@@ -3,8 +3,10 @@ const { GraphQLError } = require('graphql')
 class InternalError extends GraphQLError {
   constructor(message = 'Internal server error.', extensions) {
     super(message, {
-      code: 'INTERNAL_SERVER_ERROR',
-      ...extensions,
+      extensions: {
+        code: 'INTERNAL_SERVER_ERROR',
+        ...extensions,
+      },
     })
   }
 }
@@ -15,8 +17,10 @@ class ValidationError extends GraphQLError {
     extensions
   ) {
     super(message, {
-      code: 'VALIDATION_ERROR',
-      ...extensions,
+      extensions: {
+        code: 'VALIDATION_ERROR',
+        ...extensions,
+      },
     })
   }
 }
@@ -24,8 +28,10 @@ class ValidationError extends GraphQLError {
 class ForbiddenError extends GraphQLError {
   constructor(message = 'Forbidden', extensions) {
     super(message, {
-      code: 'FORBIDDEN',
-      ...extensions,
+      extensions: {
+        code: 'FORBIDDEN',
+        ...extensions,
+      },
     })
   }
 }
@@ -33,8 +39,10 @@ class ForbiddenError extends GraphQLError {
 class NotFoundError extends GraphQLError {
   constructor(message = 'Not Found', extensions) {
     super(message, {
-      code: 'NOT_FOUND',
-      ...extensions,
+      extensions: {
+        code: 'NOT_FOUND',
+        ...extensions,
+      },
     })
   }
 }
@@ -42,8 +50,10 @@ class NotFoundError extends GraphQLError {
 class BadRequestError extends GraphQLError {
   constructor(message = 'Bad Request', extensions) {
     super(message, {
-      code: 'BAD_REQUEST',
-      ...extensions,
+      extensions: {
+        code: 'BAD_REQUEST',
+        ...extensions,
+      },
     })
   }
 }
@@ -51,8 +61,10 @@ class BadRequestError extends GraphQLError {
 class TooManyRequestsError extends GraphQLError {
   constructor(message = 'Too Many Requests', extensions) {
     super(message, {
-      code: 'TOO_MANY_REQUESTS',
-      ...extensions,
+      extensions: {
+        code: 'TOO_MANY_REQUESTS',
+        ...extensions,
+      },
     })
   }
 }
@@ -60,8 +72,21 @@ class TooManyRequestsError extends GraphQLError {
 class ConflictError extends GraphQLError {
   constructor(message = 'Conflict Request', extensions) {
     super(message, {
-      code: 'CONFLICT',
-      ...extensions,
+      extensions: {
+        code: 'CONFLICT',
+        ...extensions,
+      },
+    })
+  }
+}
+
+class PaymentRequiredError extends GraphQLError {
+  constructor(message = 'Payment Required', extensions) {
+    super(message, {
+      extensions: {
+        code: 'PAYMENT_REQUIRED',
+        ...extensions,
+      },
     })
   }
 }
@@ -75,4 +100,5 @@ module.exports = {
   InternalError,
   NotFoundError,
   BadRequestError,
+  PaymentRequiredError,
 }
